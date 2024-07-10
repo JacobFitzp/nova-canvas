@@ -1,6 +1,6 @@
 <?php
 
-namespace Jacobfitzp\NovaForge;
+namespace Jacobfitzp\NovaCanvas;
 
 use Illuminate\Support\ServiceProvider;
 use Laravel\Nova\Events\ServingNova;
@@ -16,8 +16,8 @@ class FieldServiceProvider extends ServiceProvider
     public function boot()
     {
         Nova::serving(function (ServingNova $event) {
-            Nova::script('nova-editor', __DIR__.'/../dist/js/field.js');
-            Nova::style('nova-editor', __DIR__.'/../dist/css/field.css');
+            Nova::script('nova-canvas', __DIR__.'/../dist/js/field.js');
+            Nova::style('nova-canvas', __DIR__.'/../dist/css/field.css');
         });
     }
 

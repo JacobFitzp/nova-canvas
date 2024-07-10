@@ -1,1 +1,11 @@
 /* Nova Field CSS */
+.form-input.form-input-bottom {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.form-input.form-input-top {
+    border-bottom: 0 !important;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}

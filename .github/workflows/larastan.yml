@@ -1,0 +1,24 @@
+name: Larastan
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  laravel-tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+      - uses: actions/checkout@v3
+      - name: Set nova credentials
+        run: composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
+      - name: Install Dependencies
+        run: composer install
+      - name: Execute Larastan test
+        run: vendor/bin/phpstan analyse
