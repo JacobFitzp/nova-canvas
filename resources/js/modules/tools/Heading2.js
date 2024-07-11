@@ -1,8 +1,8 @@
-import Heading2Icon from '../../components/Icons/Heading2Icon.vue'
+import { H2Icon } from '@heroicons/vue/24/outline'
 import Standard from '../../components/Tools/Standard.vue'
 
 export default {
-    icon: Heading2Icon,
+    icon: H2Icon,
     component: Standard,
     apply (editor) {
         editor.chain().focus().toggleHeading({ level: 2 }).run()

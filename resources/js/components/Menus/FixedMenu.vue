@@ -23,7 +23,7 @@ export default {
 
     data () {
         return {
-            toolbar: ['format', 'heading1', 'heading2', 'heading3']
+            toolbar: ['format', 'separator', 'heading1', 'heading2', 'heading3', 'separator', 'blockquote']
         }
     },
 

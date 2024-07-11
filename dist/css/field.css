@@ -10,3 +10,11 @@
     border-bottom-right-radius: 0;
 }
 
+.format-dropdown:disabled {
+    opacity: 50%;
+}
+
+.format-dropdown:focus {
+    outline-color: rgba(var(--colors-primary-600));
+}
+

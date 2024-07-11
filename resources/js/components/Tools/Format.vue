@@ -1,5 +1,11 @@
 <template>
-    <select @change="applyFormat">
+    <select
+        :value="currentFormat"
+        :disabled="!currentFormat"
+        class="format-dropdown"
+        @change="applyFormat"
+    >
+        <option disabled value="">Paragraph</option>
         <option
             v-for="(format, key) in formats"
             :key="key"
@@ -24,7 +30,7 @@ export default {
                         this.editor.chain().focus().setParagraph().run()
                     },
                     active: () => {
-                        this.editor.isActive('paragraph')
+                        return this.editor.isActive('paragraph')
                     }
                 },
                 heading1: {
@@ -33,7 +39,7 @@ export default {
                         this.editor.chain().focus().toggleHeading({ level: 1 }).run()
                     },
                     active: () => {
-                        this.editor.isActive('heading', { level: 1 })
+                        return this.editor.isActive('heading', { level: 1 })
                     }
                 },
                 heading2: {
@@ -42,7 +48,7 @@ export default {
                         this.editor.chain().focus().toggleHeading({ level: 2 }).run()
                     },
                     active: () => {
-                        this.editor.isActive('heading', { level: 2 })
+                        return this.editor.isActive('heading', { level: 2 })
                     }
                 },
                 heading3: {
@@ -51,15 +57,33 @@ export default {
                         this.editor.chain().focus().toggleHeading({ level: 3 }).run()
                     },
                     active: () => {
-                        this.editor.isActive('heading', { level: 3 })
+                        return this.editor.isActive('heading', { level: 3 })
                     }
                 }
-            }
+            },
+            currentFormat: null
         }
+    },
+    created () {
+        // Listen for changes in the editor and update the current format.
+        this.editor.on('update', this.updateCurrentFormat)
+        this.editor.on('selectionUpdate', this.updateCurrentFormat)
     },
     methods: {
         applyFormat (event) {
             this.formats[event.target.value].apply()
+        },
+        updateCurrentFormat () {
+            // Reset to unknown format.
+            this.currentFormat = null
+
+            // Attempt to find active format.
+            for (const [key, format] of Object.entries(this.formats)) {
+                if (format.active()) {
+                    this.currentFormat = key
+                    break
+                }
+            }
         }
     }
 }

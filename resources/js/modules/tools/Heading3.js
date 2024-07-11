@@ -1,8 +1,8 @@
-import Heading3Icon from '../../components/Icons/Heading3Icon.vue'
+import { H3Icon } from '@heroicons/vue/24/outline'
 import Standard from '../../components/Tools/Standard.vue'
 
 export default {
-    icon: Heading3Icon,
+    icon: H3Icon,
     component: Standard,
     apply (editor) {
         editor.chain().focus().toggleHeading({ level: 3 }).run()
