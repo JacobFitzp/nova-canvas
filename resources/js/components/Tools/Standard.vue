@@ -7,7 +7,7 @@
     >
         <component
             :is="tool.icon"
-            class="h-6 w-6"
+            class="h-5 w-5"
         />
     </button>
 </template>

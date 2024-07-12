@@ -11,25 +11,23 @@
 </template>
 
 <script>
-import Tools from '../../modules/tools/index'
+import tools from '../../modules/tools/index'
 
 export default {
     props: {
         editor: {
             type: [null, Object],
             required: true
-        }
-    },
-
-    data () {
-        return {
-            toolbar: ['format', 'separator', 'heading1', 'heading2', 'heading3', 'separator', 'blockquote']
+        },
+        toolbar: {
+            type: Array,
+            required: true
         }
     },
 
     computed: {
         tools () {
-            return this.toolbar.map((item) => Tools.tools[item])
+            return this.toolbar.map((item) => tools[item])
         }
     }
 }
