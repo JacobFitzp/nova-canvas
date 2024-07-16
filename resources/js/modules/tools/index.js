@@ -9,6 +9,9 @@ import Italic from './Italic'
 import Strikethrough from './Strikethrough'
 import Underline from './Underline'
 import CodeBlock from './CodeBlock'
+import AlignCenter from './AlignCenter'
+import AlignLeft from './AlignLeft'
+import AlignRight from './AlignRight'
 
 export default {
     format: Format,
@@ -21,5 +24,8 @@ export default {
     italic: Italic,
     underline: Underline,
     strikethrough: Strikethrough,
+    alignCenter: AlignCenter,
+    alignLeft: AlignLeft,
+    alignRight: AlignRight,
     separator: Separator
 }

@@ -18,6 +18,7 @@ class FieldServiceProvider extends ServiceProvider
         Nova::serving(function (ServingNova $event) {
             Nova::script('nova-canvas', __DIR__ . '/../dist/js/field.js');
             Nova::style('nova-canvas', __DIR__ . '/../dist/css/field.css');
+            Nova::style('nova-canvas-highlighting', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css');
         });
     }
 

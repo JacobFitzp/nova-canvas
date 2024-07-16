@@ -2975,11 +2975,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var laravel_nova__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! laravel-nova */ "../../vendor/laravel/nova/resources/js/mixins/packages.js");
-/* harmony import */ var _tiptap_vue_3__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @tiptap/vue-3 */ "./node_modules/@tiptap/vue-3/dist/index.js");
+/* harmony import */ var _tiptap_vue_3__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @tiptap/vue-3 */ "./node_modules/@tiptap/vue-3/dist/index.js");
 /* harmony import */ var _tiptap_starter_kit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @tiptap/starter-kit */ "./node_modules/@tiptap/starter-kit/dist/index.js");
 /* harmony import */ var _Menus_FixedMenu_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Menus/FixedMenu.vue */ "./resources/js/components/Menus/FixedMenu.vue");
 /* harmony import */ var _modules_tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modules/tools */ "./resources/js/modules/tools/index.js");
 /* harmony import */ var _tiptap_extension_character_count__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @tiptap/extension-character-count */ "./node_modules/@tiptap/extension-character-count/dist/index.js");
+/* harmony import */ var _tiptap_extension_placeholder__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @tiptap/extension-placeholder */ "./node_modules/@tiptap/extension-placeholder/dist/index.js");
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
@@ -2996,10 +2997,11 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     FixedMenu: _Menus_FixedMenu_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    EditorContent: _tiptap_vue_3__WEBPACK_IMPORTED_MODULE_5__.EditorContent
+    EditorContent: _tiptap_vue_3__WEBPACK_IMPORTED_MODULE_6__.EditorContent
   },
   mixins: [laravel_nova__WEBPACK_IMPORTED_MODULE_0__.FormField, laravel_nova__WEBPACK_IMPORTED_MODULE_0__.HandlesValidationErrors],
   props: ['resourceName', 'resourceId', 'field'],
@@ -3040,20 +3042,20 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
   },
   mounted: function mounted() {
     var _this = this;
-    this.editor = new _tiptap_vue_3__WEBPACK_IMPORTED_MODULE_5__.Editor({
+    this.editor = new _tiptap_vue_3__WEBPACK_IMPORTED_MODULE_6__.Editor({
       editable: !this.field.readonly,
       editorProps: {
         attributes: {
-          "class": 'h-auto max-w-none block py-3 prose form-control form-input form-input-bottom form-control-bordered dark:prose-invert prose-sm focus:outline-none'
+          "class": 'nova-canvas-content h-auto min-h-40 max-w-none block py-3 prose form-control form-input form-input--bottom form-control-bordered dark:prose-invert prose-sm focus:outline-none'
         }
       },
       content: this.value,
       extensions: [_tiptap_starter_kit__WEBPACK_IMPORTED_MODULE_1__["default"].configure({
         // Disable built-in extensions which we are not using or override elsewhere.
         codeBlock: false
-      })].concat(_toConsumableArray(this.characterCountExtension()), _toConsumableArray(this.getToolExtensions())),
+      })].concat(_toConsumableArray(this.placeholderExtension()), _toConsumableArray(this.characterCountExtension()), _toConsumableArray(this.getToolExtensions())),
       onUpdate: function onUpdate() {
-        _this.value = _this.editor.getHTML();
+        _this.value = _this.getEditorContent();
       }
     });
   },
@@ -3093,6 +3095,26 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
      */
     characterCountExtension: function characterCountExtension() {
       return this.characterCountEnabled ? [_tiptap_extension_character_count__WEBPACK_IMPORTED_MODULE_4__.CharacterCount] : [];
+    },
+    /**
+     * Get extensions for the placeholder feature, if enabled.
+     */
+    placeholderExtension: function placeholderExtension() {
+      return this.field.placeholder ? [_tiptap_extension_placeholder__WEBPACK_IMPORTED_MODULE_5__.Placeholder.configure({
+        placeholder: this.field.placeholder
+      })] : [];
+    },
+    /**
+     * Get the editors content based on the configured output type.
+     */
+    getEditorContent: function getEditorContent() {
+      // JSON return type.
+      if (this.field.output === 'json') {
+        return this.editor.getJSON();
+      }
+
+      // Standard HTML return type.
+      return this.editor.getHTML();
     }
   }
 });
@@ -3329,13 +3351,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
 var _hoisted_1 = {
-  "class": "form-control py-3 h-auto form-input form-control-bordered form-input-top"
+  ref: "container",
+  "class": "nova-canvas"
 };
 var _hoisted_2 = {
-  key: 0
+  ref: "header",
+  "class": "nova-canvas-header form-control py-3 h-auto form-input form-control-bordered form-input--top"
 };
 var _hoisted_3 = {
-  "class": "text-sm mt-2"
+  key: 0
+};
+var _hoisted_4 = {
+  "class": "text-xs mt-2"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_FixedMenu = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("FixedMenu");
@@ -3348,17 +3375,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "full-width-content": _ctx.fullWidthContent
   }, {
     field: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [$options.editorReady ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FixedMenu, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$options.editorReady ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FixedMenu, {
         key: 0,
-        toolbar: $props.field.toolbar,
-        editor: $data.editor
-      }, null, 8 /* PROPS */, ["toolbar", "editor"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditorContent, {
+        editor: $data.editor,
+        toolbar: $props.field.toolbar
+      }, null, 8 /* PROPS */, ["editor", "toolbar"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 512 /* NEED_PATCH */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditorContent, {
         editor: $data.editor,
         modelValue: _ctx.value,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return _ctx.value = $event;
         })
-      }, null, 8 /* PROPS */, ["editor", "modelValue"]), $options.characterCountEnabled && $options.editorReady ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.characterCount) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.characterCountSuffix), 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
+      }, null, 8 /* PROPS */, ["editor", "modelValue"])], 512 /* NEED_PATCH */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Character count "), $options.characterCountEnabled && $options.editorReady ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.characterCount) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.characterCountSuffix), 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
     _: 1 /* STABLE */
   }, 8 /* PROPS */, ["field", "errors", "show-help-text", "full-width-content"]);
@@ -3549,6 +3576,103 @@ Nova.booting(function (app, store) {
   app.component('index-nova-editor', _components_IndexField__WEBPACK_IMPORTED_MODULE_0__["default"]);
   app.component('detail-nova-editor', _components_DetailField__WEBPACK_IMPORTED_MODULE_1__["default"]);
   app.component('form-nova-editor', _components_FormField__WEBPACK_IMPORTED_MODULE_2__["default"]);
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/tools/AlignCenter.js":
+/*!***************************************************!*\
+  !*** ./resources/js/modules/tools/AlignCenter.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/Bars3Icon.js");
+/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
+/* harmony import */ var _tiptap_extension_text_align__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @tiptap/extension-text-align */ "./node_modules/@tiptap/extension-text-align/dist/index.js");
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  icon: _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_2__["default"],
+  component: _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+  apply: function apply(editor) {
+    editor.chain().focus().setTextAlign('center').run();
+  },
+  active: function active(editor) {
+    return editor.isActive({
+      textAlign: 'center'
+    });
+  },
+  extension: function extension() {
+    return _tiptap_extension_text_align__WEBPACK_IMPORTED_MODULE_1__.TextAlign.configure({
+      types: ['heading', 'paragraph']
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/tools/AlignLeft.js":
+/*!*************************************************!*\
+  !*** ./resources/js/modules/tools/AlignLeft.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/Bars3BottomLeftIcon.js");
+/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  icon: _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
+  component: _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+  apply: function apply(editor) {
+    editor.chain().focus().setTextAlign('left').run();
+  },
+  active: function active(editor) {
+    return editor.isActive({
+      textAlign: 'left'
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/tools/AlignRight.js":
+/*!**************************************************!*\
+  !*** ./resources/js/modules/tools/AlignRight.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/Bars3BottomRightIcon.js");
+/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  icon: _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
+  component: _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+  apply: function apply(editor) {
+    editor.chain().focus().setTextAlign('right').run();
+  },
+  active: function active(editor) {
+    return editor.isActive({
+      textAlign: 'right'
+    });
+  }
 });
 
 /***/ }),
@@ -3889,6 +4013,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Strikethrough__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Strikethrough */ "./resources/js/modules/tools/Strikethrough.js");
 /* harmony import */ var _Underline__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Underline */ "./resources/js/modules/tools/Underline.js");
 /* harmony import */ var _CodeBlock__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./CodeBlock */ "./resources/js/modules/tools/CodeBlock.js");
+/* harmony import */ var _AlignCenter__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./AlignCenter */ "./resources/js/modules/tools/AlignCenter.js");
+/* harmony import */ var _AlignLeft__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./AlignLeft */ "./resources/js/modules/tools/AlignLeft.js");
+/* harmony import */ var _AlignRight__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./AlignRight */ "./resources/js/modules/tools/AlignRight.js");
+
+
+
 
 
 
@@ -3911,6 +4041,9 @@ __webpack_require__.r(__webpack_exports__);
   italic: _Italic__WEBPACK_IMPORTED_MODULE_7__["default"],
   underline: _Underline__WEBPACK_IMPORTED_MODULE_9__["default"],
   strikethrough: _Strikethrough__WEBPACK_IMPORTED_MODULE_8__["default"],
+  alignCenter: _AlignCenter__WEBPACK_IMPORTED_MODULE_11__["default"],
+  alignLeft: _AlignLeft__WEBPACK_IMPORTED_MODULE_12__["default"],
+  alignRight: _AlignRight__WEBPACK_IMPORTED_MODULE_13__["default"],
   separator: _Separator__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 
@@ -5426,10 +5559,10 @@ function __(key, replace) {
 
 /***/ }),
 
-/***/ "./resources/css/field.css":
-/*!*********************************!*\
-  !*** ./resources/css/field.css ***!
-  \*********************************/
+/***/ "./resources/scss/field.scss":
+/*!***********************************!*\
+  !*** ./resources/scss/field.scss ***!
+  \***********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -30319,6 +30452,108 @@ highlight.default = highlight;
 
 /***/ }),
 
+/***/ "./node_modules/@heroicons/vue/24/outline/esm/Bars3BottomLeftIcon.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@heroicons/vue/24/outline/esm/Bars3BottomLeftIcon.js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "vue");
+
+
+function render(_ctx, _cache) {
+  return ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    "stroke-width": "1.5",
+    stroke: "currentColor",
+    "aria-hidden": "true",
+    "data-slot": "icon"
+  }, [
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      d: "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
+    })
+  ]))
+}
+
+/***/ }),
+
+/***/ "./node_modules/@heroicons/vue/24/outline/esm/Bars3BottomRightIcon.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/@heroicons/vue/24/outline/esm/Bars3BottomRightIcon.js ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "vue");
+
+
+function render(_ctx, _cache) {
+  return ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    "stroke-width": "1.5",
+    stroke: "currentColor",
+    "aria-hidden": "true",
+    "data-slot": "icon"
+  }, [
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      d: "M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25"
+    })
+  ]))
+}
+
+/***/ }),
+
+/***/ "./node_modules/@heroicons/vue/24/outline/esm/Bars3Icon.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@heroicons/vue/24/outline/esm/Bars3Icon.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "vue");
+
+
+function render(_ctx, _cache) {
+  return ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    "stroke-width": "1.5",
+    stroke: "currentColor",
+    "aria-hidden": "true",
+    "data-slot": "icon"
+  }, [
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      d: "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+    })
+  ]))
+}
+
+/***/ }),
+
 /***/ "./node_modules/@heroicons/vue/24/outline/esm/BoldIcon.js":
 /*!****************************************************************!*\
   !*** ./node_modules/@heroicons/vue/24/outline/esm/BoldIcon.js ***!
@@ -40468,6 +40703,104 @@ const Paragraph = _tiptap_core__WEBPACK_IMPORTED_MODULE_0__.Node.create({
 
 /***/ }),
 
+/***/ "./node_modules/@tiptap/extension-placeholder/dist/index.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@tiptap/extension-placeholder/dist/index.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Placeholder: () => (/* binding */ Placeholder),
+/* harmony export */   "default": () => (/* binding */ Placeholder)
+/* harmony export */ });
+/* harmony import */ var _tiptap_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @tiptap/core */ "./node_modules/@tiptap/core/dist/index.js");
+/* harmony import */ var _tiptap_pm_state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @tiptap/pm/state */ "./node_modules/@tiptap/pm/state/dist/index.js");
+/* harmony import */ var _tiptap_pm_view__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @tiptap/pm/view */ "./node_modules/@tiptap/pm/view/dist/index.js");
+
+
+
+
+/**
+ * This extension allows you to add a placeholder to your editor.
+ * A placeholder is a text that appears when the editor or a node is empty.
+ * @see https://www.tiptap.dev/api/extensions/placeholder
+ */
+const Placeholder = _tiptap_core__WEBPACK_IMPORTED_MODULE_2__.Extension.create({
+    name: 'placeholder',
+    addOptions() {
+        return {
+            emptyEditorClass: 'is-editor-empty',
+            emptyNodeClass: 'is-empty',
+            placeholder: 'Write something …',
+            showOnlyWhenEditable: true,
+            considerAnyAsEmpty: false,
+            showOnlyCurrent: true,
+            includeChildren: false,
+        };
+    },
+    addProseMirrorPlugins() {
+        return [
+            new _tiptap_pm_state__WEBPACK_IMPORTED_MODULE_0__.Plugin({
+                key: new _tiptap_pm_state__WEBPACK_IMPORTED_MODULE_0__.PluginKey('placeholder'),
+                props: {
+                    decorations: ({ doc, selection }) => {
+                        var _a;
+                        const active = this.editor.isEditable || !this.options.showOnlyWhenEditable;
+                        const { anchor } = selection;
+                        const decorations = [];
+                        if (!active) {
+                            return null;
+                        }
+                        // only calculate isEmpty once due to its performance impacts (see issue #3360)
+                        const { firstChild } = doc.content;
+                        const isLeaf = firstChild && firstChild.type.isLeaf;
+                        const isAtom = firstChild && firstChild.isAtom;
+                        const isValidNode = this.options.considerAnyAsEmpty
+                            ? true
+                            : firstChild && firstChild.type.name === ((_a = doc.type.contentMatch.defaultType) === null || _a === void 0 ? void 0 : _a.name);
+                        const isEmptyDoc = doc.content.childCount <= 1
+                            && firstChild
+                            && isValidNode
+                            && (firstChild.nodeSize <= 2 && (!isLeaf || !isAtom));
+                        doc.descendants((node, pos) => {
+                            const hasAnchor = anchor >= pos && anchor <= pos + node.nodeSize;
+                            const isEmpty = !node.isLeaf && !node.childCount;
+                            if ((hasAnchor || !this.options.showOnlyCurrent) && isEmpty) {
+                                const classes = [this.options.emptyNodeClass];
+                                if (isEmptyDoc) {
+                                    classes.push(this.options.emptyEditorClass);
+                                }
+                                const decoration = _tiptap_pm_view__WEBPACK_IMPORTED_MODULE_1__.Decoration.node(pos, pos + node.nodeSize, {
+                                    class: classes.join(' '),
+                                    'data-placeholder': typeof this.options.placeholder === 'function'
+                                        ? this.options.placeholder({
+                                            editor: this.editor,
+                                            node,
+                                            pos,
+                                            hasAnchor,
+                                        })
+                                        : this.options.placeholder,
+                                });
+                                decorations.push(decoration);
+                            }
+                            return this.options.includeChildren;
+                        });
+                        return _tiptap_pm_view__WEBPACK_IMPORTED_MODULE_1__.DecorationSet.create(doc, decorations);
+                    },
+                },
+            }),
+        ];
+    },
+});
+
+
+//# sourceMappingURL=index.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/@tiptap/extension-strike/dist/index.js":
 /*!*************************************************************!*\
   !*** ./node_modules/@tiptap/extension-strike/dist/index.js ***!
@@ -40558,6 +40891,86 @@ const Strike = _tiptap_core__WEBPACK_IMPORTED_MODULE_0__.Mark.create({
                 type: this.type,
             }),
         ];
+    },
+});
+
+
+//# sourceMappingURL=index.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/@tiptap/extension-text-align/dist/index.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@tiptap/extension-text-align/dist/index.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   TextAlign: () => (/* binding */ TextAlign),
+/* harmony export */   "default": () => (/* binding */ TextAlign)
+/* harmony export */ });
+/* harmony import */ var _tiptap_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @tiptap/core */ "./node_modules/@tiptap/core/dist/index.js");
+
+
+/**
+ * This extension allows you to align text.
+ * @see https://www.tiptap.dev/api/extensions/text-align
+ */
+const TextAlign = _tiptap_core__WEBPACK_IMPORTED_MODULE_0__.Extension.create({
+    name: 'textAlign',
+    addOptions() {
+        return {
+            types: [],
+            alignments: ['left', 'center', 'right', 'justify'],
+            defaultAlignment: 'left',
+        };
+    },
+    addGlobalAttributes() {
+        return [
+            {
+                types: this.options.types,
+                attributes: {
+                    textAlign: {
+                        default: this.options.defaultAlignment,
+                        parseHTML: element => element.style.textAlign || this.options.defaultAlignment,
+                        renderHTML: attributes => {
+                            if (attributes.textAlign === this.options.defaultAlignment) {
+                                return {};
+                            }
+                            return { style: `text-align: ${attributes.textAlign}` };
+                        },
+                    },
+                },
+            },
+        ];
+    },
+    addCommands() {
+        return {
+            setTextAlign: (alignment) => ({ commands }) => {
+                if (!this.options.alignments.includes(alignment)) {
+                    return false;
+                }
+                return this.options.types
+                    .map(type => commands.updateAttributes(type, { textAlign: alignment }))
+                    .every(response => response);
+            },
+            unsetTextAlign: () => ({ commands }) => {
+                return this.options.types
+                    .map(type => commands.resetAttributes(type, 'textAlign'))
+                    .every(response => response);
+            },
+        };
+    },
+    addKeyboardShortcuts() {
+        return {
+            'Mod-Shift-l': () => this.editor.commands.setTextAlign('left'),
+            'Mod-Shift-e': () => this.editor.commands.setTextAlign('center'),
+            'Mod-Shift-r': () => this.editor.commands.setTextAlign('right'),
+            'Mod-Shift-j': () => this.editor.commands.setTextAlign('justify'),
+        };
     },
 });
 
@@ -75908,7 +76321,7 @@ const isThenable = (thing) =>
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/field"], () => (__webpack_require__("./resources/js/field.js")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/field"], () => (__webpack_require__("./resources/css/field.css")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/field"], () => (__webpack_require__("./resources/scss/field.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

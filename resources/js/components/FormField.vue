@@ -6,20 +6,27 @@
         :full-width-content="fullWidthContent"
     >
         <template #field>
-            <div>
-                <div class="form-control py-3 h-auto form-input form-control-bordered form-input-top">
+            <div
+                ref="container"
+                class="nova-canvas"
+            >
+                <div
+                    ref="header"
+                    class="nova-canvas-header form-control py-3 h-auto form-input form-control-bordered form-input--top"
+                >
                     <FixedMenu
                         v-if="editorReady"
-                        :toolbar="field.toolbar"
                         :editor="editor"
+                        :toolbar="field.toolbar"
                     />
                 </div>
                 <EditorContent :editor="editor" v-model="value" />
-                <div v-if="characterCountEnabled && editorReady">
-                    <p class="text-sm mt-2">
-                        {{ characterCount }} {{ characterCountSuffix }}
-                    </p>
-                </div>
+            </div>
+            <!-- Character count -->
+            <div v-if="characterCountEnabled && editorReady">
+                <p class="text-xs mt-2">
+                    {{ characterCount }} {{ characterCountSuffix }}
+                </p>
             </div>
         </template>
     </DefaultField>
@@ -32,6 +39,7 @@ import StarterKit from '@tiptap/starter-kit'
 import FixedMenu from './Menus/FixedMenu.vue'
 import tools from '../modules/tools'
 import { CharacterCount } from '@tiptap/extension-character-count'
+import { Placeholder } from '@tiptap/extension-placeholder'
 
 export default {
     components: {
@@ -91,7 +99,7 @@ export default {
             editable: !this.field.readonly,
             editorProps: {
                 attributes: {
-                    class: 'nova-canvas h-auto max-w-none block py-3 prose form-control form-input form-input-bottom form-control-bordered dark:prose-invert prose-sm focus:outline-none',
+                    class: 'nova-canvas-content h-auto min-h-40 max-w-none block py-3 prose form-control form-input form-input--bottom form-control-bordered dark:prose-invert prose-sm focus:outline-none',
                 },
             },
             content: this.value,
@@ -100,11 +108,12 @@ export default {
                     // Disable built-in extensions which we are not using or override elsewhere.
                     codeBlock: false,
                 }),
+                ...this.placeholderExtension(),
                 ...this.characterCountExtension(),
                 ...this.getToolExtensions()
             ],
             onUpdate: () => {
-                this.value = this.editor.getHTML()
+                this.value = this.getEditorContent()
             }
         })
     },
@@ -148,6 +157,30 @@ export default {
          */
         characterCountExtension () {
             return this.characterCountEnabled ? [CharacterCount] : []
+        },
+
+        /**
+         * Get extensions for the placeholder feature, if enabled.
+         */
+        placeholderExtension () {
+            return this.field.placeholder ? [
+                Placeholder.configure({
+                    placeholder: this.field.placeholder,
+                }),
+            ] : []
+        },
+
+        /**
+         * Get the editors content based on the configured output type.
+         */
+        getEditorContent () {
+            // JSON return type.
+            if (this.field.output === 'json') {
+                return this.editor.getJSON()
+            }
+
+            // Standard HTML return type.
+            return this.editor.getHTML()
         }
     }
 }

@@ -24,6 +24,7 @@ class Canvas extends Field
     {
         // Set default options.
         $this->withMeta([
+            'output' => 'html',
             'toolbar' => $this->defaultToolbar,
             'disk' => config('nova.storage_disk'),
         ]);
@@ -83,5 +84,15 @@ class Canvas extends Field
             'characterCount' => true,
             'characterCountMode' => 'words',
         ]);
+    }
+
+    /**
+     * Use JSON output instead of HTML.
+     *
+     * @return self
+     */
+    public function asJson(): self
+    {
+        return $this->withMeta(['output' => 'json']);
     }
 }

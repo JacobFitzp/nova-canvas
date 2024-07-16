@@ -1,0 +1,29 @@
+// -----------------------
+// Stacked form input.
+// -----------------------
+.form-input {
+    &.form-input--top {
+        border-bottom: 0 !important;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    &.form-input--bottom {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+}
+
+// -----------------------
+// Nova Canvas.
+// -----------------------
+.nova-canvas {
+    // Format dropdown.
+    .format-dropdown:disabled {
+        opacity: 50%;
+    }
+
+    .format-dropdown:focus {
+        outline-color: rgba(var(--colors-primary-600));
+    }
+}
