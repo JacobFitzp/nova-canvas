@@ -9,6 +9,7 @@
             <div
                 ref="container"
                 class="nova-canvas"
+                :class="{ 'nova-canvas--disabled': !editorReady }"
             >
                 <div
                     ref="header"
@@ -19,6 +20,10 @@
                         :editor="editor"
                         :toolbar="field.toolbar"
                     />
+                    <span v-else>
+                        <EyeIcon class="h-4 w-4 inline mr-2" />
+                        Read-only mode
+                    </span>
                 </div>
                 <EditorContent :editor="editor" v-model="value" />
             </div>
@@ -34,6 +39,7 @@
 
 <script>
 import { FormField, HandlesValidationErrors } from 'laravel-nova'
+import { EyeIcon } from '@heroicons/vue/24/outline'
 import { Editor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import FixedMenu from './Menus/FixedMenu.vue'
@@ -43,6 +49,7 @@ import { Placeholder } from '@tiptap/extension-placeholder'
 
 export default {
     components: {
+        EyeIcon,
         FixedMenu,
         EditorContent
     },
@@ -62,7 +69,7 @@ export default {
          * Is editor instance ready?
          */
         editorReady () {
-            return this.editor !== null
+            return this.editor !== null && !this.field.readonly
         },
 
         /**

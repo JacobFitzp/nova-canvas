@@ -18,6 +18,11 @@
 // Nova Canvas.
 // -----------------------
 .nova-canvas {
+
+    &--disabled {
+        cursor: not-allowed;
+    }
+
     // Format dropdown.
     .format-dropdown:disabled {
         opacity: 50%;

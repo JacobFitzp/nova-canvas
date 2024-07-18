@@ -2975,7 +2975,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var laravel_nova__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! laravel-nova */ "../../vendor/laravel/nova/resources/js/mixins/packages.js");
-/* harmony import */ var _tiptap_vue_3__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @tiptap/vue-3 */ "./node_modules/@tiptap/vue-3/dist/index.js");
+/* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/EyeIcon.js");
+/* harmony import */ var _tiptap_vue_3__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @tiptap/vue-3 */ "./node_modules/@tiptap/vue-3/dist/index.js");
 /* harmony import */ var _tiptap_starter_kit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @tiptap/starter-kit */ "./node_modules/@tiptap/starter-kit/dist/index.js");
 /* harmony import */ var _Menus_FixedMenu_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Menus/FixedMenu.vue */ "./resources/js/components/Menus/FixedMenu.vue");
 /* harmony import */ var _modules_tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modules/tools */ "./resources/js/modules/tools/index.js");
@@ -2998,10 +2999,12 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
+    EyeIcon: _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_6__["default"],
     FixedMenu: _Menus_FixedMenu_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    EditorContent: _tiptap_vue_3__WEBPACK_IMPORTED_MODULE_6__.EditorContent
+    EditorContent: _tiptap_vue_3__WEBPACK_IMPORTED_MODULE_7__.EditorContent
   },
   mixins: [laravel_nova__WEBPACK_IMPORTED_MODULE_0__.FormField, laravel_nova__WEBPACK_IMPORTED_MODULE_0__.HandlesValidationErrors],
   props: ['resourceName', 'resourceId', 'field'],
@@ -3015,7 +3018,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
      * Is editor instance ready?
      */
     editorReady: function editorReady() {
-      return this.editor !== null;
+      return this.editor !== null && !this.field.readonly;
     },
     /**
      * Is character count feature enabled?
@@ -3042,7 +3045,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
   },
   mounted: function mounted() {
     var _this = this;
-    this.editor = new _tiptap_vue_3__WEBPACK_IMPORTED_MODULE_6__.Editor({
+    this.editor = new _tiptap_vue_3__WEBPACK_IMPORTED_MODULE_7__.Editor({
       editable: !this.field.readonly,
       editorProps: {
         attributes: {
@@ -3351,12 +3354,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
 var _hoisted_1 = {
-  ref: "container",
-  "class": "nova-canvas"
-};
-var _hoisted_2 = {
   ref: "header",
   "class": "nova-canvas-header form-control py-3 h-auto form-input form-control-bordered form-input--top"
+};
+var _hoisted_2 = {
+  key: 1
 };
 var _hoisted_3 = {
   key: 0
@@ -3366,6 +3368,7 @@ var _hoisted_4 = {
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_FixedMenu = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("FixedMenu");
+  var _component_EyeIcon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("EyeIcon");
   var _component_EditorContent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("EditorContent");
   var _component_DefaultField = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DefaultField");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_DefaultField, {
@@ -3375,17 +3378,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "full-width-content": _ctx.fullWidthContent
   }, {
     field: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$options.editorReady ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FixedMenu, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+        ref: "container",
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["nova-canvas", {
+          'nova-canvas--disabled': !$options.editorReady
+        }])
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [$options.editorReady ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FixedMenu, {
         key: 0,
         editor: $data.editor,
         toolbar: $props.field.toolbar
-      }, null, 8 /* PROPS */, ["editor", "toolbar"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 512 /* NEED_PATCH */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditorContent, {
+      }, null, 8 /* PROPS */, ["editor", "toolbar"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EyeIcon, {
+        "class": "h-4 w-4 inline mr-2"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Read-only mode ")]))], 512 /* NEED_PATCH */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditorContent, {
         editor: $data.editor,
         modelValue: _ctx.value,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return _ctx.value = $event;
         })
-      }, null, 8 /* PROPS */, ["editor", "modelValue"])], 512 /* NEED_PATCH */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Character count "), $options.characterCountEnabled && $options.editorReady ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.characterCount) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.characterCountSuffix), 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+      }, null, 8 /* PROPS */, ["editor", "modelValue"])], 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Character count "), $options.characterCountEnabled && $options.editorReady ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.characterCount) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.characterCountSuffix), 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
     _: 1 /* STABLE */
   }, 8 /* PROPS */, ["field", "errors", "show-help-text", "full-width-content"]);
@@ -30649,6 +30659,45 @@ function render(_ctx, _cache) {
       "stroke-linecap": "round",
       "stroke-linejoin": "round",
       d: "M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"
+    })
+  ]))
+}
+
+/***/ }),
+
+/***/ "./node_modules/@heroicons/vue/24/outline/esm/EyeIcon.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@heroicons/vue/24/outline/esm/EyeIcon.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "vue");
+
+
+function render(_ctx, _cache) {
+  return ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    "stroke-width": "1.5",
+    stroke: "currentColor",
+    "aria-hidden": "true",
+    "data-slot": "icon"
+  }, [
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      d: "M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+    }),
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      d: "M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
     })
   ]))
 }
