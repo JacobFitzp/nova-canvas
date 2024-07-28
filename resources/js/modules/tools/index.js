@@ -12,6 +12,7 @@ import CodeBlock from './CodeBlock'
 import AlignCenter from './AlignCenter'
 import AlignLeft from './AlignLeft'
 import AlignRight from './AlignRight'
+import Image from './Image'
 
 export default {
     format: Format,
@@ -20,6 +21,7 @@ export default {
     heading3: Heading3,
     blockquote: Blockquote,
     codeBlock: CodeBlock,
+    image: Image,
     bold: Bold,
     italic: Italic,
     underline: Underline,
@@ -27,5 +29,7 @@ export default {
     alignCenter: AlignCenter,
     alignLeft: AlignLeft,
     alignRight: AlignRight,
-    separator: Separator
+    // Visual divider between tools, has a shorthand representation of '|'.
+    separator: Separator,
+    '|': Separator
 }

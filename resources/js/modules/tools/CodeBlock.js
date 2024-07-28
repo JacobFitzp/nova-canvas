@@ -1,7 +1,7 @@
 import { CodeBracketIcon } from '@heroicons/vue/24/outline'
 import Standard from '../../components/Tools/Standard.vue'
-import { CodeBlockLowlight } from '@tiptap/extension-code-block-lowlight'
 import { common, createLowlight } from 'lowlight'
+import CodeBlock from '../tiptap/extensions/CodeBlock'
 
 // todo: Language selection dropdown.
 export default {
@@ -14,7 +14,7 @@ export default {
         return editor.isActive('codeBlock')
     },
     extension () {
-        return CodeBlockLowlight.configure({
+        return CodeBlock.configure({
             lowlight: createLowlight(common)
         })
     }

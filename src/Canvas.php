@@ -13,20 +13,14 @@ class Canvas extends Field
      */
     public $component = 'nova-editor';
 
-    /**
-     * Default toolbar configuration.
-     *
-     * @var string[]
-     */
-    protected array $defaultToolbar = ['format'];
-
     public function __construct($name, $attribute = null, callable $resolveCallback = null)
     {
         // Set default options.
         $this->withMeta([
             'output' => 'html',
-            'toolbar' => $this->defaultToolbar,
+            'toolbar' => config('nova-canvas.toolbars.default'),
             'disk' => config('nova.storage_disk'),
+            'endpoint' => config('nova-canvas.images.endpoint'),
         ]);
 
         parent::__construct($name, $attribute, $resolveCallback);
@@ -34,16 +28,18 @@ class Canvas extends Field
 
     /**
      * Customize the toolbar configuration.
-     * Can either be an array or comma-seperated string.
+     * Can either be an array or comma-seperated string, alternatively pass preset name.
      *
      * @param string[]|string $options
      * @return self
      */
     public function toolbar(array|string $options): self
     {
-        // Convert comma-seperated options to an array.
+        // Convert comma-seperated options or preset name.
         if (is_string($options)) {
-            $options = explode(',', $options);
+            $options = filled(config("nova-canvas.toolbars.$options"))
+                ? config("nova-canvas.toolbars.$options")
+                : explode(',', $options);
         }
 
         return $this->withMeta(['toolbar' => $options]);
@@ -53,11 +49,15 @@ class Canvas extends Field
      * Set the storage disk for file uploads.
      *
      * @param string $disk
+     * @param string $path
      * @return self
      */
-    public function disk(string $disk): self
+    public function disk(string $disk, string $path = '/'): self
     {
-        return $this->withMeta(['disk' => $disk]);
+        return $this->withMeta([
+            'disk' => $disk,
+            'path' => $path,
+        ]);
     }
 
     /**
@@ -65,7 +65,7 @@ class Canvas extends Field
      *
      * @return self
      */
-    public function withCharacterCount(): self
+    public function characterCount(): self
     {
         return $this->withMeta([
             'characterCount' => true,
@@ -78,7 +78,7 @@ class Canvas extends Field
      *
      * @return self
      */
-    public function withWordCount(): self
+    public function wordCount(): self
     {
         return $this->withMeta([
             'characterCount' => true,

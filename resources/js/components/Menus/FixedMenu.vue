@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center gap-2">
+    <div class="flex flex-wrap gap-2">
         <template v-for="tool in tools">
             <component
                 :is="tool.component"
@@ -19,15 +19,21 @@ export default {
             type: [null, Object],
             required: true
         },
-        toolbar: {
-            type: Array,
+        field: {
+            type: Object,
             required: true
         }
     },
 
     computed: {
         tools () {
-            return this.toolbar.map((item) => tools[item])
+            return this.field.toolbar.map((item) => {
+                // Inject field into each tool.
+                const tool = tools[item]
+                tool.field = this.field
+
+                return tool
+            })
         }
     }
 }

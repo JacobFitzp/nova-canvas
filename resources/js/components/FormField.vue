@@ -18,7 +18,7 @@
                     <FixedMenu
                         v-if="editorReady"
                         :editor="editor"
-                        :toolbar="field.toolbar"
+                        :field="field"
                     />
                     <span v-else>
                         <EyeIcon class="h-4 w-4 inline mr-2" />
@@ -83,9 +83,7 @@ export default {
          * Get the current character or word count.
          */
         characterCount () {
-            if (!this.characterCountEnabled || !this.editorReady) {
-                return 0
-            }
+            if (!this.characterCountEnabled || !this.editorReady) return 0
 
             return this.field.characterCountMode === 'words'
                 ? this.editor.storage.characterCount.words()
@@ -133,14 +131,14 @@ export default {
         /*
          * Set the initial, internal value for the field.
          */
-        setInitialValue() {
+        setInitialValue () {
             this.value = this.field.value || ''
         },
 
         /**
          * Fill the given FormData object with the field's internal value.
          */
-        fill(formData) {
+        fill (formData) {
             formData.append(this.fieldAttribute, this.value || '')
         },
 
