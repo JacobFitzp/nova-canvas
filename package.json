@@ -26,6 +26,7 @@
         "@heroicons/vue": "^2.1.5",
         "@tiptap/extension-character-count": "^2.4.0",
         "@tiptap/extension-code-block-lowlight": "^2.4.0",
+        "@tiptap/extension-dropcursor": "^2.5.7",
         "@tiptap/extension-placeholder": "^2.4.0",
         "@tiptap/extension-table": "^2.4.0",
         "@tiptap/extension-table-cell": "^2.4.0",

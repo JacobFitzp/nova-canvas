@@ -1,5 +1,5 @@
 import { UnderlineIcon } from '@heroicons/vue/24/outline'
-import Standard from '../../components/Tools/Standard.vue'
+import Standard from '../../../components/Tools/Standard.vue'
 import { Underline } from '@tiptap/extension-underline'
 
 export default {

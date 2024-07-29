@@ -1,14 +1,12 @@
 <template>
     <button
         type="button"
-        class="hover:text-primary-600"
-        :class="{ 'text-primary-600': tool.active(editor) }"
-        @click="tool.apply(editor)"
+        class="hover:text-primary-600 disabled:opacity-50"
+        :class="{ 'text-primary-600': isActive }"
+        :disabled="isDisabled"
+        @click="apply"
     >
-        <component
-            :is="tool.icon"
-            class="h-5 w-5"
-        />
+        <component :is="icon" class="h-5 w-5" />
     </button>
 </template>
 
@@ -16,6 +14,26 @@
 import BaseTool from './BaseTool'
 
 export default {
-    extends: BaseTool
+    extends: BaseTool,
+    computed: {
+        isActive () {
+            return this.tool.active !== undefined
+                ? this.tool.active(this.editor)
+                : false
+        },
+        isDisabled () {
+            return this.tool.disabled !== undefined
+                ? this.tool.disabled(this.editor)
+                : false
+        },
+        icon () {
+            return this.tool.icon
+        }
+    },
+    methods: {
+        apply () {
+            this.tool.apply(this.editor)
+        }
+    }
 }
 </script>

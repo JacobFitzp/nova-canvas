@@ -113,6 +113,7 @@ export default {
                     // Disable built-in extensions which we are not using or override elsewhere.
                     codeBlock: false,
                 }),
+
                 ...this.placeholderExtension(),
                 ...this.characterCountExtension(),
                 ...this.getToolExtensions()

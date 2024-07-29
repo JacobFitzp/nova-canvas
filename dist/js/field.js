@@ -6218,7 +6218,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BaseTool__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaseTool */ "./resources/js/components/Tools/BaseTool.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  "extends": _BaseTool__WEBPACK_IMPORTED_MODULE_0__["default"]
+  "extends": _BaseTool__WEBPACK_IMPORTED_MODULE_0__["default"],
+  computed: {
+    isActive: function isActive() {
+      return this.tool.active !== undefined ? this.tool.active(this.editor) : false;
+    },
+    isDisabled: function isDisabled() {
+      return this.tool.disabled !== undefined ? this.tool.disabled(this.editor) : false;
+    },
+    icon: function icon() {
+      return this.tool.icon;
+    }
+  },
+  methods: {
+    apply: function apply() {
+      this.tool.apply(this.editor);
+    }
+  }
 });
 
 /***/ }),
@@ -6443,18 +6459,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
+var _hoisted_1 = ["disabled"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     type: "button",
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["hover:text-primary-600", {
-      'text-primary-600': _ctx.tool.active(_ctx.editor)
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["hover:text-primary-600 disabled:opacity-50", {
+      'text-primary-600': $options.isActive
     }]),
-    onClick: _cache[0] || (_cache[0] = function ($event) {
-      return _ctx.tool.apply(_ctx.editor);
+    disabled: $options.isDisabled,
+    onClick: _cache[0] || (_cache[0] = function () {
+      return $options.apply && $options.apply.apply($options, arguments);
     })
-  }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)(_ctx.tool.icon), {
+  }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)($options.icon), {
     "class": "h-5 w-5"
-  }))], 2 /* CLASS */);
+  }))], 10 /* CLASS, PROPS */, _hoisted_1);
 }
 
 /***/ }),
@@ -6524,103 +6542,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/modules/tools/AlignCenter.js":
-/*!***************************************************!*\
-  !*** ./resources/js/modules/tools/AlignCenter.js ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/Bars3Icon.js");
-/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
-/* harmony import */ var _tiptap_extension_text_align__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @tiptap/extension-text-align */ "./node_modules/@tiptap/extension-text-align/dist/index.js");
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  icon: _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_2__["default"],
-  component: _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-  apply: function apply(editor) {
-    editor.chain().focus().setTextAlign('center').run();
-  },
-  active: function active(editor) {
-    return editor.isActive({
-      textAlign: 'center'
-    });
-  },
-  extension: function extension() {
-    return _tiptap_extension_text_align__WEBPACK_IMPORTED_MODULE_1__.TextAlign.configure({
-      types: ['heading', 'paragraph']
-    });
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/modules/tools/AlignLeft.js":
-/*!*************************************************!*\
-  !*** ./resources/js/modules/tools/AlignLeft.js ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/Bars3BottomLeftIcon.js");
-/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  icon: _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
-  component: _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-  apply: function apply(editor) {
-    editor.chain().focus().setTextAlign('left').run();
-  },
-  active: function active(editor) {
-    return editor.isActive({
-      textAlign: 'left'
-    });
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/modules/tools/AlignRight.js":
-/*!**************************************************!*\
-  !*** ./resources/js/modules/tools/AlignRight.js ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/Bars3BottomRightIcon.js");
-/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  icon: _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
-  component: _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-  apply: function apply(editor) {
-    editor.chain().focus().setTextAlign('right').run();
-  },
-  active: function active(editor) {
-    return editor.isActive({
-      textAlign: 'right'
-    });
-  }
-});
-
-/***/ }),
-
 /***/ "./resources/js/modules/tools/Blockquote.js":
 /*!**************************************************!*\
   !*** ./resources/js/modules/tools/Blockquote.js ***!
@@ -6644,34 +6565,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   active: function active(editor) {
     return editor.isActive('blockquote');
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/modules/tools/Bold.js":
-/*!********************************************!*\
-  !*** ./resources/js/modules/tools/Bold.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/BoldIcon.js");
-/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  icon: _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
-  component: _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-  apply: function apply(editor) {
-    editor.chain().focus().toggleBold().run();
-  },
-  active: function active(editor) {
-    return editor.isActive('bold');
   }
 });
 
@@ -6764,10 +6657,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/modules/tools/Heading1.js":
-/*!************************************************!*\
-  !*** ./resources/js/modules/tools/Heading1.js ***!
-  \************************************************/
+/***/ "./resources/js/modules/tools/Headings/Heading1.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/modules/tools/Headings/Heading1.js ***!
+  \*********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -6776,7 +6669,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/H1Icon.js");
-/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
+/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -6796,10 +6689,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/modules/tools/Heading2.js":
-/*!************************************************!*\
-  !*** ./resources/js/modules/tools/Heading2.js ***!
-  \************************************************/
+/***/ "./resources/js/modules/tools/Headings/Heading2.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/modules/tools/Headings/Heading2.js ***!
+  \*********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -6808,7 +6701,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/H2Icon.js");
-/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
+/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -6828,10 +6721,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/modules/tools/Heading3.js":
-/*!************************************************!*\
-  !*** ./resources/js/modules/tools/Heading3.js ***!
-  \************************************************/
+/***/ "./resources/js/modules/tools/Headings/Heading3.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/modules/tools/Headings/Heading3.js ***!
+  \*********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -6840,7 +6733,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/H3Icon.js");
-/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
+/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -6855,6 +6748,62 @@ __webpack_require__.r(__webpack_exports__);
     return editor.isActive('heading', {
       level: 3
     });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/tools/History/Redo.js":
+/*!****************************************************!*\
+  !*** ./resources/js/modules/tools/History/Redo.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/ArrowUturnRightIcon.js");
+/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  icon: _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
+  component: _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+  apply: function apply(editor) {
+    editor.chain().focus().redo().run();
+  },
+  disabled: function disabled(editor) {
+    return !editor.can().redo();
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/tools/History/Undo.js":
+/*!****************************************************!*\
+  !*** ./resources/js/modules/tools/History/Undo.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/ArrowUturnLeftIcon.js");
+/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  icon: _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
+  component: _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+  apply: function apply(editor) {
+    editor.chain().focus().undo().run();
+  },
+  disabled: function disabled(editor) {
+    return !editor.can().undo();
   }
 });
 
@@ -6913,34 +6862,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/modules/tools/Italic.js":
-/*!**********************************************!*\
-  !*** ./resources/js/modules/tools/Italic.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/ItalicIcon.js");
-/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  icon: _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
-  component: _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-  apply: function apply(editor) {
-    editor.chain().focus().toggleItalic().run();
-  },
-  active: function active(editor) {
-    return editor.isActive('italic');
-  }
-});
-
-/***/ }),
-
 /***/ "./resources/js/modules/tools/OrderedList.js":
 /*!***************************************************!*\
   !*** ./resources/js/modules/tools/OrderedList.js ***!
@@ -6984,34 +6905,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   component: _components_Tools_Separator_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-});
-
-/***/ }),
-
-/***/ "./resources/js/modules/tools/Strikethrough.js":
-/*!*****************************************************!*\
-  !*** ./resources/js/modules/tools/Strikethrough.js ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/StrikethroughIcon.js");
-/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  icon: _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
-  component: _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-  apply: function apply(editor) {
-    editor.chain().focus().toggleStrike().run();
-  },
-  active: function active(editor) {
-    return editor.isActive('strike');
-  }
 });
 
 /***/ }),
@@ -7061,10 +6954,191 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/modules/tools/Underline.js":
-/*!*************************************************!*\
-  !*** ./resources/js/modules/tools/Underline.js ***!
-  \*************************************************/
+/***/ "./resources/js/modules/tools/TextAlignment/AlignCenter.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/modules/tools/TextAlignment/AlignCenter.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/Bars3Icon.js");
+/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
+/* harmony import */ var _tiptap_extension_text_align__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @tiptap/extension-text-align */ "./node_modules/@tiptap/extension-text-align/dist/index.js");
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  icon: _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_2__["default"],
+  component: _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+  apply: function apply(editor) {
+    editor.chain().focus().setTextAlign('center').run();
+  },
+  active: function active(editor) {
+    return editor.isActive({
+      textAlign: 'center'
+    });
+  },
+  extension: function extension() {
+    return _tiptap_extension_text_align__WEBPACK_IMPORTED_MODULE_1__.TextAlign.configure({
+      types: ['heading', 'paragraph']
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/tools/TextAlignment/AlignLeft.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/modules/tools/TextAlignment/AlignLeft.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/Bars3BottomLeftIcon.js");
+/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  icon: _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
+  component: _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+  apply: function apply(editor) {
+    editor.chain().focus().setTextAlign('left').run();
+  },
+  active: function active(editor) {
+    return editor.isActive({
+      textAlign: 'left'
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/tools/TextAlignment/AlignRight.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/modules/tools/TextAlignment/AlignRight.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/Bars3BottomRightIcon.js");
+/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  icon: _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
+  component: _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+  apply: function apply(editor) {
+    editor.chain().focus().setTextAlign('right').run();
+  },
+  active: function active(editor) {
+    return editor.isActive({
+      textAlign: 'right'
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/tools/TextStyling/Bold.js":
+/*!********************************************************!*\
+  !*** ./resources/js/modules/tools/TextStyling/Bold.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/BoldIcon.js");
+/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  icon: _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
+  component: _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+  apply: function apply(editor) {
+    editor.chain().focus().toggleBold().run();
+  },
+  active: function active(editor) {
+    return editor.isActive('bold');
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/tools/TextStyling/Italic.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/modules/tools/TextStyling/Italic.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/ItalicIcon.js");
+/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  icon: _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
+  component: _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+  apply: function apply(editor) {
+    editor.chain().focus().toggleItalic().run();
+  },
+  active: function active(editor) {
+    return editor.isActive('italic');
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/tools/TextStyling/Strikethrough.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/modules/tools/TextStyling/Strikethrough.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/StrikethroughIcon.js");
+/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  icon: _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
+  component: _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+  apply: function apply(editor) {
+    editor.chain().focus().toggleStrike().run();
+  },
+  active: function active(editor) {
+    return editor.isActive('strike');
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/tools/TextStyling/Underline.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/modules/tools/TextStyling/Underline.js ***!
+  \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -7073,7 +7147,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _heroicons_vue_24_outline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/24/outline */ "./node_modules/@heroicons/vue/24/outline/esm/UnderlineIcon.js");
-/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
+/* harmony import */ var _components_Tools_Standard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Tools/Standard.vue */ "./resources/js/components/Tools/Standard.vue");
 /* harmony import */ var _tiptap_extension_underline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @tiptap/extension-underline */ "./node_modules/@tiptap/extension-underline/dist/index.js");
 
 
@@ -7106,23 +7180,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Format__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Format */ "./resources/js/modules/tools/Format.js");
-/* harmony import */ var _Heading1__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Heading1 */ "./resources/js/modules/tools/Heading1.js");
-/* harmony import */ var _Heading2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Heading2 */ "./resources/js/modules/tools/Heading2.js");
-/* harmony import */ var _Heading3__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Heading3 */ "./resources/js/modules/tools/Heading3.js");
+/* harmony import */ var _Headings_Heading1__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Headings/Heading1 */ "./resources/js/modules/tools/Headings/Heading1.js");
+/* harmony import */ var _Headings_Heading2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Headings/Heading2 */ "./resources/js/modules/tools/Headings/Heading2.js");
+/* harmony import */ var _Headings_Heading3__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Headings/Heading3 */ "./resources/js/modules/tools/Headings/Heading3.js");
 /* harmony import */ var _Separator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Separator */ "./resources/js/modules/tools/Separator.js");
 /* harmony import */ var _Blockquote__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Blockquote */ "./resources/js/modules/tools/Blockquote.js");
-/* harmony import */ var _Bold__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Bold */ "./resources/js/modules/tools/Bold.js");
-/* harmony import */ var _Italic__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Italic */ "./resources/js/modules/tools/Italic.js");
-/* harmony import */ var _Strikethrough__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Strikethrough */ "./resources/js/modules/tools/Strikethrough.js");
-/* harmony import */ var _Underline__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Underline */ "./resources/js/modules/tools/Underline.js");
+/* harmony import */ var _TextStyling_Bold__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./TextStyling/Bold */ "./resources/js/modules/tools/TextStyling/Bold.js");
+/* harmony import */ var _TextStyling_Italic__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./TextStyling/Italic */ "./resources/js/modules/tools/TextStyling/Italic.js");
+/* harmony import */ var _TextStyling_Strikethrough__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./TextStyling/Strikethrough */ "./resources/js/modules/tools/TextStyling/Strikethrough.js");
+/* harmony import */ var _TextStyling_Underline__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./TextStyling/Underline */ "./resources/js/modules/tools/TextStyling/Underline.js");
 /* harmony import */ var _CodeBlock__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./CodeBlock */ "./resources/js/modules/tools/CodeBlock.js");
-/* harmony import */ var _AlignCenter__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./AlignCenter */ "./resources/js/modules/tools/AlignCenter.js");
-/* harmony import */ var _AlignLeft__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./AlignLeft */ "./resources/js/modules/tools/AlignLeft.js");
-/* harmony import */ var _AlignRight__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./AlignRight */ "./resources/js/modules/tools/AlignRight.js");
+/* harmony import */ var _TextAlignment_AlignCenter__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./TextAlignment/AlignCenter */ "./resources/js/modules/tools/TextAlignment/AlignCenter.js");
+/* harmony import */ var _TextAlignment_AlignLeft__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./TextAlignment/AlignLeft */ "./resources/js/modules/tools/TextAlignment/AlignLeft.js");
+/* harmony import */ var _TextAlignment_AlignRight__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./TextAlignment/AlignRight */ "./resources/js/modules/tools/TextAlignment/AlignRight.js");
 /* harmony import */ var _Image__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./Image */ "./resources/js/modules/tools/Image.js");
 /* harmony import */ var _OrderedList__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./OrderedList */ "./resources/js/modules/tools/OrderedList.js");
 /* harmony import */ var _BulletList__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./BulletList */ "./resources/js/modules/tools/BulletList.js");
 /* harmony import */ var _Table__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./Table */ "./resources/js/modules/tools/Table.js");
+/* harmony import */ var _History_Undo__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./History/Undo */ "./resources/js/modules/tools/History/Undo.js");
+/* harmony import */ var _History_Redo__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./History/Redo */ "./resources/js/modules/tools/History/Redo.js");
+
+
 
 
 
@@ -7143,22 +7221,24 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   format: _Format__WEBPACK_IMPORTED_MODULE_0__["default"],
-  heading1: _Heading1__WEBPACK_IMPORTED_MODULE_1__["default"],
-  heading2: _Heading2__WEBPACK_IMPORTED_MODULE_2__["default"],
-  heading3: _Heading3__WEBPACK_IMPORTED_MODULE_3__["default"],
+  heading1: _Headings_Heading1__WEBPACK_IMPORTED_MODULE_1__["default"],
+  heading2: _Headings_Heading2__WEBPACK_IMPORTED_MODULE_2__["default"],
+  heading3: _Headings_Heading3__WEBPACK_IMPORTED_MODULE_3__["default"],
   blockquote: _Blockquote__WEBPACK_IMPORTED_MODULE_5__["default"],
   codeBlock: _CodeBlock__WEBPACK_IMPORTED_MODULE_10__["default"],
   image: _Image__WEBPACK_IMPORTED_MODULE_14__["default"],
   table: _Table__WEBPACK_IMPORTED_MODULE_17__["default"],
-  bold: _Bold__WEBPACK_IMPORTED_MODULE_6__["default"],
-  italic: _Italic__WEBPACK_IMPORTED_MODULE_7__["default"],
-  underline: _Underline__WEBPACK_IMPORTED_MODULE_9__["default"],
-  strikethrough: _Strikethrough__WEBPACK_IMPORTED_MODULE_8__["default"],
-  alignCenter: _AlignCenter__WEBPACK_IMPORTED_MODULE_11__["default"],
-  alignLeft: _AlignLeft__WEBPACK_IMPORTED_MODULE_12__["default"],
-  alignRight: _AlignRight__WEBPACK_IMPORTED_MODULE_13__["default"],
+  bold: _TextStyling_Bold__WEBPACK_IMPORTED_MODULE_6__["default"],
+  italic: _TextStyling_Italic__WEBPACK_IMPORTED_MODULE_7__["default"],
+  underline: _TextStyling_Underline__WEBPACK_IMPORTED_MODULE_9__["default"],
+  strikethrough: _TextStyling_Strikethrough__WEBPACK_IMPORTED_MODULE_8__["default"],
+  alignCenter: _TextAlignment_AlignCenter__WEBPACK_IMPORTED_MODULE_11__["default"],
+  alignLeft: _TextAlignment_AlignLeft__WEBPACK_IMPORTED_MODULE_12__["default"],
+  alignRight: _TextAlignment_AlignRight__WEBPACK_IMPORTED_MODULE_13__["default"],
   orderedList: _OrderedList__WEBPACK_IMPORTED_MODULE_15__["default"],
   bulletList: _BulletList__WEBPACK_IMPORTED_MODULE_16__["default"],
+  undo: _History_Undo__WEBPACK_IMPORTED_MODULE_18__["default"],
+  redo: _History_Redo__WEBPACK_IMPORTED_MODULE_19__["default"],
   // Visual divider between tools, has a shorthand representation of '|'.
   separator: _Separator__WEBPACK_IMPORTED_MODULE_4__["default"],
   '|': _Separator__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -36010,6 +36090,74 @@ module.exports = highlight;
 highlight.HighlightJS = highlight;
 highlight.default = highlight;
 
+
+/***/ }),
+
+/***/ "./node_modules/@heroicons/vue/24/outline/esm/ArrowUturnLeftIcon.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@heroicons/vue/24/outline/esm/ArrowUturnLeftIcon.js ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "vue");
+
+
+function render(_ctx, _cache) {
+  return ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    "stroke-width": "1.5",
+    stroke: "currentColor",
+    "aria-hidden": "true",
+    "data-slot": "icon"
+  }, [
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      d: "M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+    })
+  ]))
+}
+
+/***/ }),
+
+/***/ "./node_modules/@heroicons/vue/24/outline/esm/ArrowUturnRightIcon.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@heroicons/vue/24/outline/esm/ArrowUturnRightIcon.js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "vue");
+
+
+function render(_ctx, _cache) {
+  return ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    "stroke-width": "1.5",
+    stroke: "currentColor",
+    "aria-hidden": "true",
+    "data-slot": "icon"
+  }, [
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      d: "m15 15 6-6m0 0-6-6m6 6H9a6 6 0 0 0 0 12h3"
+    })
+  ]))
+}
 
 /***/ }),
 
