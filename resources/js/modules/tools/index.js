@@ -13,6 +13,9 @@ import AlignCenter from './AlignCenter'
 import AlignLeft from './AlignLeft'
 import AlignRight from './AlignRight'
 import Image from './Image'
+import OrderedList from './OrderedList'
+import BulletList from './BulletList'
+import Table from './Table'
 
 export default {
     format: Format,
@@ -22,6 +25,7 @@ export default {
     blockquote: Blockquote,
     codeBlock: CodeBlock,
     image: Image,
+    table: Table,
     bold: Bold,
     italic: Italic,
     underline: Underline,
@@ -29,6 +33,8 @@ export default {
     alignCenter: AlignCenter,
     alignLeft: AlignLeft,
     alignRight: AlignRight,
+    orderedList: OrderedList,
+    bulletList: BulletList,
     // Visual divider between tools, has a shorthand representation of '|'.
     separator: Separator,
     '|': Separator

@@ -104,7 +104,7 @@ export default {
             editable: !this.field.readonly,
             editorProps: {
                 attributes: {
-                    class: 'nova-canvas-content h-auto min-h-40 max-w-none block py-3 prose form-control form-input form-input--bottom form-control-bordered dark:prose-invert prose-sm focus:outline-none',
+                    class: 'nova-canvas-content h-auto min-h-40 max-w-none block py-3 prose prose-slate form-control form-input form-input--bottom form-control-bordered dark:prose-invert prose-sm focus:outline-none',
                 },
             },
             content: this.value,
@@ -146,11 +146,15 @@ export default {
          * Get extensions for the various tools.
          */
         getToolExtensions () {
-            const extensions = []
+            let extensions = []
 
             for (const [key, tool] of Object.entries(tools)) {
                 if (tool.extension !== undefined) {
-                    extensions.push(tool.extension())
+                    const extension = tool.extension()
+
+                    Array.isArray(extension)
+                        ? extensions = extensions.concat(extension)
+                        : extensions.push(extension)
                 }
             }
 

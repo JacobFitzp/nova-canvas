@@ -10,15 +10,15 @@ export default {
     icon: TableCellsIcon,
     component: Standard,
     apply (editor) {
-        editor.chain().focus().toggle.run()
+        editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()
     },
     active (editor) {
-        return editor.isActive('codeBlock')
+        return editor.isActive('table')
     },
     extension () {
         return [
             Table.configure({
-                resizable: true,
+                resizable: true
             }),
             TableRow,
             TableHeader,

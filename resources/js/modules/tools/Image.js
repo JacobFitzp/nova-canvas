@@ -16,8 +16,8 @@ export default {
         // Build form data to upload image.
         const formData = new FormData()
         formData.append('image', file)
-        formData.append('disk', this.field.disk)
-        formData.append('path', this.field.path)
+        formData.append('disk', this.field.disk || null)
+        formData.append('path', this.field.path || null)
 
         // Submit form data to endpoint.
         return axios.post(this.field.endpoint, formData).then((response) => {
