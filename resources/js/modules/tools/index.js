@@ -16,6 +16,7 @@ import Image from './Image'
 import OrderedList from './OrderedList'
 import BulletList from './BulletList'
 import Table from './Table'
+import Link from './Link'
 import Undo from './History/Undo'
 import Redo from './History/Redo'
 
@@ -37,6 +38,7 @@ export default {
     alignRight: AlignRight,
     orderedList: OrderedList,
     bulletList: BulletList,
+    link: Link,
     undo: Undo,
     redo: Redo,
     // Visual divider between tools, has a shorthand representation of '|'.

@@ -30,11 +30,9 @@ composer require jacobfitzp/nova-canvas
 Canvas::make('Content')
 ```
 
-[Read our full documentation here](https://jacobfitzp.github.io/nova-canvas-docs/about.html)
+[Read full documentation here](https://jacobfitzp.github.io/nova-canvas-docs/about.html)
 
 ## Contribution
-
-We are looking for contributors to help improve and maintain this package.
 
 ### Bugs
 

@@ -27,6 +27,7 @@
         "@tiptap/extension-character-count": "^2.4.0",
         "@tiptap/extension-code-block-lowlight": "^2.4.0",
         "@tiptap/extension-dropcursor": "^2.5.7",
+        "@tiptap/extension-link": "^2.5.8",
         "@tiptap/extension-placeholder": "^2.4.0",
         "@tiptap/extension-table": "^2.4.0",
         "@tiptap/extension-table-cell": "^2.4.0",
@@ -37,7 +38,9 @@
         "@tiptap/pm": "^2.4.0",
         "@tiptap/starter-kit": "^2.4.0",
         "@tiptap/vue-3": "^2.4.0",
+        "laravel-nova-ui": "^0.4.12",
         "lowlight": "^3.1.0",
+        "tippy.js": "^6.3.7",
         "tiptap-extension-upload-image": "^1.0.1"
     }
 }
