@@ -4,7 +4,7 @@ return [
     // Define available toolbar presets.
     'toolbars' => [
         // DO NOT remove the default toolbar.
-        'default' => [],
+        'default' => ['format', '|', 'heading1', 'heading2', 'heading3', '|', 'bold', 'italic', 'strikethrough', 'underline', '|', 'alignLeft', 'alignCenter', 'alignRight', '|', 'orderedList', 'bulletList', '|', 'link', 'blockquote', 'codeBlock', 'image', '|', 'undo', 'redo'],
 
         // Add your own presets here ...
     ],
