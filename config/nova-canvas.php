@@ -13,5 +13,7 @@ return [
     'images' => [
         // The endpoint used for handling image uploads.
         'endpoint' => '/nova-vendor/jacobfitzp/nova-canvas/upload',
+        // The default storage path to use.
+        'path' => 'nova-canvas',
     ],
 ];

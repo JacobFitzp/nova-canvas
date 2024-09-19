@@ -19,7 +19,6 @@
                         state="danger"
                         class="mr-3"
                     >
-
                         Remove
                     </Button>
 

@@ -1,1 +1,19 @@
-.form-input.form-input--top{border-bottom:0!important;border-bottom-left-radius:0;border-bottom-right-radius:0}.form-input.form-input--bottom{border-top-left-radius:0;border-top-right-radius:0}.nova-canvas--disabled{cursor:not-allowed}.nova-canvas .format-dropdown:disabled{opacity:50%}.nova-canvas .format-dropdown:focus{outline-color:rgba(var(--colors-primary-600))}
+.form-input.form-input--top {
+  border-bottom: 0 !important;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.form-input.form-input--bottom {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.nova-canvas--disabled {
+  cursor: not-allowed;
+}
+.nova-canvas .format-dropdown:disabled {
+  opacity: 50%;
+}
+.nova-canvas .format-dropdown:focus {
+  outline-color: rgba(var(--colors-primary-600));
+}

@@ -14,7 +14,6 @@
         "@vue/compiler-sfc": "^3.2.22",
         "form-backend-validation": "^2.3.3",
         "laravel-mix": "^6.0.41",
-        "lodash": "^4.17.21",
         "postcss": "^8.3.11",
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.77.8",
@@ -38,7 +37,9 @@
         "@tiptap/pm": "^2.4.0",
         "@tiptap/starter-kit": "^2.4.0",
         "@tiptap/vue-3": "^2.4.0",
+        "buffer": "^6.0.3",
         "laravel-nova-ui": "^0.4.12",
+        "lodash": "^4.17.21",
         "lowlight": "^3.1.0",
         "tippy.js": "^6.3.7",
         "tiptap-extension-upload-image": "^1.0.1"
