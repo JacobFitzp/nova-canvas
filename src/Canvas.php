@@ -21,7 +21,7 @@ class Canvas extends Field
             'toolbar' => config('nova-canvas.toolbars.default'),
             'disk' => config('nova.storage_disk'),
             'endpoint' => config('nova-canvas.images.endpoint'),
-            'path' => config('nova-canvas.images.path')
+            'path' => config('nova-canvas.images.path'),
         ]);
 
         parent::__construct($name, $attribute, $resolveCallback);
@@ -56,6 +56,7 @@ class Canvas extends Field
     public function disk(string $disk, ?string $path = null): self
     {
         $path ??= config('nova-canvas.images.path');
+
         return $this->withMeta(['disk' => $disk, 'path' => $path]);
     }
 
