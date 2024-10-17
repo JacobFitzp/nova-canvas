@@ -8,10 +8,12 @@
         <template #field>
             <div
                 ref="container"
+                sticky-container
                 class="nova-canvas"
                 :class="{ 'nova-canvas--disabled': !editorReady }"
             >
                 <div
+                    v-sticky
                     ref="header"
                     class="nova-canvas-header form-control py-3 h-auto form-input form-control-bordered form-input--top"
                 >
@@ -104,7 +106,8 @@ export default {
             editable: !this.field.readonly,
             editorProps: {
                 attributes: {
-                    class: 'nova-canvas-content h-auto min-h-40 max-w-none block py-3 prose prose-slate form-control form-input form-input--bottom form-control-bordered dark:prose-invert prose-sm focus:outline-none',
+                    class: 'nova-canvas-content h-auto overflow-y-scroll min-h-40 max-w-none block py-3 prose prose-slate form-control form-input form-input--bottom form-control-bordered dark:prose-invert prose-sm focus:outline-none',
+                    style: this.field.scrollable ? `height: ${this.field.scrollable}px;` : ''
                 },
             },
             content: this.value,

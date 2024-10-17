@@ -22,6 +22,7 @@ class Canvas extends Field
             'disk' => config('nova.storage_disk'),
             'endpoint' => config('nova-canvas.images.endpoint'),
             'path' => config('nova-canvas.images.path'),
+            'scrollable' => null,
         ]);
 
         parent::__construct($name, $attribute, $resolveCallback);
@@ -94,5 +95,16 @@ class Canvas extends Field
     public function asJson(): self
     {
         return $this->withMeta(['output' => 'json']);
+    }
+
+    /**
+     * Set the editor content to a fixed height and make scrollable.
+     *
+     * @param int|null $height Height of the editor in px, null to disable.
+     * @return self
+     */
+    public function scrollable(?int $height = 400): self
+    {
+        return $this->withMeta(['scrollable' => $height]);
     }
 }
