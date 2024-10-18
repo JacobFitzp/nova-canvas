@@ -8,6 +8,7 @@ import Bold from './TextStyling/Bold'
 import Italic from './TextStyling/Italic'
 import Strikethrough from './TextStyling/Strikethrough'
 import Underline from './TextStyling/Underline'
+import ClearFormat from './TextStyling/ClearFormat'
 import CodeBlock from './CodeBlock'
 import AlignCenter from './TextAlignment/AlignCenter'
 import AlignLeft from './TextAlignment/AlignLeft'
@@ -32,6 +33,7 @@ export default {
     bold: Bold,
     italic: Italic,
     underline: Underline,
+    clearFormat: ClearFormat,
     strikethrough: Strikethrough,
     alignCenter: AlignCenter,
     alignLeft: AlignLeft,

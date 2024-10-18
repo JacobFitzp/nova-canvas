@@ -17,3 +17,7 @@
 .nova-canvas .format-dropdown:focus {
   outline-color: rgba(var(--colors-primary-600));
 }
+.nova-canvas-header.top-sticky {
+  border-radius: 0;
+  box-shadow: none;
+}

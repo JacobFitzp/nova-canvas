@@ -31,4 +31,12 @@
     .format-dropdown:focus {
         outline-color: rgba(var(--colors-primary-600));
     }
+
+    // Header (Editor toolbar)
+    &-header {
+        &.top-sticky {
+            border-radius: 0;
+            box-shadow: none;
+        }
+    }
 }

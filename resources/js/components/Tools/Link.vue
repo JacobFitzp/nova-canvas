@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import tippy from 'tippy.js'
 import BaseTool from './BaseTool'
 import { LinkIcon } from '@heroicons/vue/24/outline'
 import InsertLink from '../Modals/InsertLink.vue'
