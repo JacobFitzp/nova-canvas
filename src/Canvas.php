@@ -17,13 +17,15 @@ class Canvas extends Field
     {
         // Set default options.
         $this->withMeta([
-            'output' => 'html',
-            'toolbar' => config('nova-canvas.toolbars.default'),
-            'disk' => config('nova.storage_disk'),
+            'output' => config('nova-canvas.defaults.output'),
+            'disk' => config('nova-canvas.defaults.disk') ?? config('nova.storage_disk'),
             'endpoint' => config('nova-canvas.images.endpoint'),
-            'path' => config('nova-canvas.images.path'),
-            'scrollable' => null,
+            'path' => config('nova-canvas.defaults.path'),
+            'scrollable' => config('nova-canvas.defaults.scrollable'),
         ]);
+
+        // Set default toolbar.
+        $this->toolbar(config('nova-canvas.defaults.toolbar'));
 
         parent::__construct($name, $attribute, $resolveCallback);
     }
@@ -56,9 +58,10 @@ class Canvas extends Field
      */
     public function disk(string $disk, ?string $path = null): self
     {
-        $path ??= config('nova-canvas.images.path');
-
-        return $this->withMeta(['disk' => $disk, 'path' => $path]);
+        return $this->withMeta([
+            'disk' => $disk,
+            'path' => $path ?? config('nova-canvas.defaults.path'),
+        ]);
     }
 
     /**
@@ -95,6 +98,16 @@ class Canvas extends Field
     public function asJson(): self
     {
         return $this->withMeta(['output' => 'json']);
+    }
+
+    /**
+     * Use HTML output instead of JSON.
+     *
+     * @return self
+     */
+    public function asHtml(): self
+    {
+        return $this->withMeta(['output' => 'html']);
     }
 
     /**
