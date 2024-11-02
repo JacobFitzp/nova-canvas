@@ -3,6 +3,7 @@
         type="button"
         class="hover:text-primary-600 disabled:opacity-50"
         :class="{ 'text-primary-600': isActive }"
+        :aria-pressed="isActive"
         :disabled="isDisabled"
         @click="apply"
     >

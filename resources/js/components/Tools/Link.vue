@@ -3,6 +3,7 @@
         type="button"
         class="hover:text-primary-600 disabled:opacity-50"
         :class="{ 'text-primary-600': isActive }"
+        :aria-pressed="isActive"
         @click="openModal"
     >
         <LinkIcon class="h-5 w-5" />
