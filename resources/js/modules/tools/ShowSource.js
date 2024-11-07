@@ -14,6 +14,6 @@ export default {
     }
   },
   active(editor) {
-    return editor.isShowSourceActive;
+    return editor.isShowSourceActive || false;
   },
 };
