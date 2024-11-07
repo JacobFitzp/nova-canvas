@@ -44,8 +44,8 @@ export default {
     link: Link,
     undo: Undo,
     redo: Redo,
+    showSource: ShowSource,
     // Visual divider between tools, has a shorthand representation of '|'.
     separator: Separator,
     '|': Separator,
-    'show-source': ShowSource,
 }
