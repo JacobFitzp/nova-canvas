@@ -20,6 +20,7 @@ import Table from './Table'
 import Link from './Link'
 import Undo from './History/Undo'
 import Redo from './History/Redo'
+import ShowSource from './ShowSource'
 
 export default {
     format: Format,
@@ -45,5 +46,6 @@ export default {
     redo: Redo,
     // Visual divider between tools, has a shorthand representation of '|'.
     separator: Separator,
-    '|': Separator
+    '|': Separator,
+    'show-source': ShowSource,
 }
