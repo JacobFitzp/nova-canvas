@@ -5,6 +5,7 @@
                 :is="tool.component"
                 :tool="tool"
                 :editor="editor"
+                :refs="refs"
             />
         </template>
     </div>
@@ -17,6 +18,10 @@ export default {
     props: {
         editor: {
             type: [null, Object],
+            required: true
+        },
+        refs: {
+            type: Object,
             required: true
         },
         field: {

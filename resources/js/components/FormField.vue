@@ -21,6 +21,7 @@
                         v-if="editorReady"
                         :editor="editor"
                         :field="field"
+                        :refs="$refs"
                     />
                     <span v-else>
                         <EyeIcon class="h-4 w-4 inline mr-2" />

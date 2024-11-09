@@ -33,7 +33,7 @@ export default {
     },
     methods: {
         apply () {
-            this.tool.apply(this.editor)
+            this.tool.apply(this.editor, this.refs)
         }
     }
 }

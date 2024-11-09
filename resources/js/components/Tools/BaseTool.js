@@ -4,6 +4,10 @@ export default {
             type: [null, Object],
             required: true
         },
+        refs: {
+            type: Object,
+            required: true
+        },
         tool: {
             type: Object,
             required: true

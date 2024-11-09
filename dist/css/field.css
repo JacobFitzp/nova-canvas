@@ -21,3 +21,6 @@
   border-radius: 0;
   box-shadow: none;
 }
+.nova-canvas.show-source .nova-canvas-content {
+  font-family: Consolas, serif;
+}

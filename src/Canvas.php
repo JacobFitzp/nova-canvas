@@ -16,6 +16,8 @@ class Canvas extends Field
      */
     public $component = 'nova-editor';
 
+    public $showOnIndex = false;
+
     public function __construct($name, $attribute = null, callable $resolveCallback = null)
     {
         // Set default options.

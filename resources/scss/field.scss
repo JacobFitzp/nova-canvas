@@ -39,4 +39,11 @@
             box-shadow: none;
         }
     }
+
+    // Show source / code view styling
+    &.show-source {
+        .nova-canvas-content {
+            font-family: Consolas, serif;
+        }
+    }
 }
