@@ -13,7 +13,6 @@ export default {
             this.isActive.value = false
             refs.container.classList.remove('show-source')
         } else {
-            editor.commands.clearContent()
             editor.commands.setContent(`<textarea>${format(editor.getHTML())}</textarea>`)
             this.isActive.value = true
             refs.container.classList.add('show-source')
