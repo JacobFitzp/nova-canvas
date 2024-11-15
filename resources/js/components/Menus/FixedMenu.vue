@@ -37,6 +37,11 @@ export default {
                 const tool = tools[item]
                 tool.field = this.field
 
+                // Initialize the tool.
+                if (tool.init) {
+                    tool.init(this.editor, this.refs)
+                }
+
                 return tool
             })
         }

@@ -1,5 +1,5 @@
 .form-input.form-input--top {
-  border-bottom: 0 !important;
+  border-bottom: 0;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -19,8 +19,21 @@
 }
 .nova-canvas-header.top-sticky {
   border-radius: 0;
+  border-bottom: 4px dashed rgba(var(--colors-gray-200));
   box-shadow: none;
 }
+.nova-canvas-header button {
+  transition: 100ms ease-in-out;
+}
 .nova-canvas.show-source .nova-canvas-content {
+  cursor: not-allowed;
   font-family: Consolas, serif;
+  white-space: pre-wrap;
+}
+.nova-canvas.show-source .nova-canvas-content p {
+  margin: 0;
+}
+
+.dark:root .nova-canvas-header.top-sticky {
+  border-bottom: 4px dashed rgba(var(--colors-gray-700));
 }

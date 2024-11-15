@@ -15,7 +15,7 @@
                 <div
                     v-sticky
                     ref="header"
-                    class="nova-canvas-header form-control py-3 h-auto form-input form-control-bordered form-input--top"
+                    class="nova-canvas-header form-control bg-gray-50 py-3 h-auto form-input form-control-bordered form-input--top"
                 >
                     <FixedMenu
                         v-if="editorReady"

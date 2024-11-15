@@ -2,7 +2,7 @@
     <select
         :value="currentFormat"
         :disabled="!currentFormat"
-        class="format-dropdown rounded-sm dark:bg-gray-900"
+        class="format-dropdown rounded-sm bg-gray-50 dark:bg-gray-900"
         @change="applyFormat"
     >
         <option disabled value="">Paragraph</option>

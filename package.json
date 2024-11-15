@@ -38,10 +38,10 @@
         "@tiptap/starter-kit": "^2.4.0",
         "@tiptap/vue-3": "^2.4.0",
         "buffer": "^6.0.3",
-        "html-format": "^1.1.7",
         "laravel-nova-ui": "^0.4.12",
         "lodash": "^4.17.21",
         "lowlight": "^3.1.0",
+        "simply-beautiful": "^1.0.1",
         "tippy.js": "^6.3.7",
         "tiptap-extension-upload-image": "^1.0.1",
         "vue3-sticky-directive": "^0.0.2"
