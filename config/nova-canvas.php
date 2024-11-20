@@ -23,6 +23,14 @@ return [
 
     // Image upload options.
     'images' => [
+        // Available image sizes.
+        // Label => Class
+        'sizes' => [
+            '25%' => 'w-1/4',
+            '50%' => 'w-1/2',
+            '100%' => 'w-full',
+        ],
+
         // The endpoint used for handling image uploads.
         'endpoint' => '/nova-vendor/jacobfitzp/nova-canvas/upload',
     ],

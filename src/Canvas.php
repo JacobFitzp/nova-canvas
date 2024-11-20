@@ -24,9 +24,10 @@ class Canvas extends Field
         $this->withMeta([
             'output' => config('nova-canvas.defaults.output'),
             'disk' => config('nova-canvas.defaults.disk') ?? config('nova.storage_disk'),
-            'endpoint' => config('nova-canvas.images.endpoint'),
             'path' => config('nova-canvas.defaults.path'),
             'scrollable' => config('nova-canvas.defaults.scrollable'),
+            'imageEndpoint' => config('nova-canvas.images.endpoint'),
+            'imageSizes' => config('nova-canvas.images.sizes'),
         ]);
 
         // Set default toolbar.

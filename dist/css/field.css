@@ -33,6 +33,12 @@
 .nova-canvas.show-source .nova-canvas-content p {
   margin: 0;
 }
+.nova-canvas-content img.ProseMirror-selectednode {
+  outline: 2px solid rgba(var(--colors-primary-600));
+}
+.nova-canvas-content img.w-1\/4 {
+  width: 25%;
+}
 
 .dark:root .nova-canvas-header.top-sticky {
   border-bottom: 4px dashed rgba(var(--colors-gray-700));

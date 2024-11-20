@@ -22,6 +22,7 @@
                         :editor="editor"
                         :field="field"
                         :refs="$refs"
+                        :tools="tools"
                     />
                     <span v-else>
                         <EyeIcon class="h-4 w-4 inline mr-2" />
@@ -99,6 +100,24 @@ export default {
         characterCountSuffix () {
             const suffix = this.field.characterCountMode === 'words' ? 'word' : 'character'
             return this.characterCount === 1 ? suffix : suffix + 's'
+        },
+
+        /**
+         * Get tools.
+         */
+        tools () {
+            return this.field.toolbar.map((item) => {
+                // Inject field into each tool.
+                const tool = tools[item]
+                tool.field = this.field
+
+                // Initialize the tool.
+                if (tool.init) {
+                    tool.init(this.editor, this.refs)
+                }
+
+                return tool
+            })
         }
     },
 
@@ -116,6 +135,7 @@ export default {
                 StarterKit.configure({
                     // Disable built-in extensions which we are not using or override elsewhere.
                     codeBlock: false,
+                    image: false,
                 }),
 
                 ...this.placeholderExtension(),
@@ -153,7 +173,7 @@ export default {
         getToolExtensions () {
             let extensions = []
 
-            for (const [key, tool] of Object.entries(tools)) {
+            for (const [key, tool] of Object.entries(this.tools)) {
                 if (tool.extension !== undefined) {
                     const extension = tool.extension()
 
