@@ -18,8 +18,7 @@ export default {
         return CustomImage.configure({
             endpoint: this.field.imageEndpoint,
             disk: this.field.disk || null,
-            path: this.field.path || null,
-            sizes: this.field.imageSizes
+            path: this.field.path || null
         })
     }
 }

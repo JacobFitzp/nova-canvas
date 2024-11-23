@@ -10,8 +10,7 @@ export default Image.extend({
             ...Image.config.addOptions(),
             endpoint: '',
             disk: '',
-            path: '',
-            sizes: {}
+            path: ''
         };
     },
 
@@ -19,12 +18,22 @@ export default Image.extend({
         return {
             ...Image.config.addAttributes(),
             size: {
-                default: 'small',
-                rendered: false
+                default: null,
+                renderHTML: (attributes) => {
+                    return {
+                        style: `width: ${attributes.size}%`,
+                    }
+                }
             },
             float: {
-                default: 'none',
-                rendered: false
+                default: null,
+                renderHTML: (attributes) => {
+                    return {
+                        style: attributes.float === 'center'
+                            ? 'margin: 0 auto'
+                            : `float: ${attributes.float}`,
+                    }
+                }
             }
         }
     },
@@ -90,9 +99,6 @@ export default Image.extend({
     },
 
     renderHTML ({ node, HTMLAttributes }) {
-        // Apply size class if available.
-        if (node.attrs.size) HTMLAttributes.class = this.options.sizes[node.attrs.size]
-
         return ['img', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)]
     }
 })

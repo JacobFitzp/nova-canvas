@@ -26,8 +26,7 @@ class Canvas extends Field
             'disk' => config('nova-canvas.defaults.disk') ?? config('nova.storage_disk'),
             'path' => config('nova-canvas.defaults.path'),
             'scrollable' => config('nova-canvas.defaults.scrollable'),
-            'imageEndpoint' => config('nova-canvas.images.endpoint'),
-            'imageSizes' => config('nova-canvas.images.sizes'),
+            'imageEndpoint' => config('nova-canvas.image_endpoint'),
         ]);
 
         // Set default toolbar.

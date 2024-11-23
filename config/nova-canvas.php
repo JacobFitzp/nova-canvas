@@ -21,19 +21,8 @@ return [
         // Add your own presets here ...
     ],
 
-    // Image upload options.
-    'images' => [
-        // Available image sizes.
-        // Label => Class
-        'sizes' => [
-            '25%' => 'w-1/4',
-            '50%' => 'w-1/2',
-            '100%' => 'w-full',
-        ],
-
-        // The endpoint used for handling image uploads.
-        'endpoint' => '/nova-vendor/jacobfitzp/nova-canvas/upload',
-    ],
+    // The endpoint used for handling image uploads.
+    'image_endpoint' => '/nova-vendor/jacobfitzp/nova-canvas/upload',
 
     // Stylesheet to include for code highlighting in the editor (lowlight).
     'lowlight_stylesheet' => 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css',
