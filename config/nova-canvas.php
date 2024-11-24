@@ -17,7 +17,7 @@ return [
 
     // Define available toolbar presets.
     'toolbars' => [
-        'default' => ['format', '|', 'heading1', 'heading2', 'heading3', '|', 'bold', 'italic', 'strikethrough', 'underline', '|', 'alignLeft', 'alignCenter', 'alignRight', '|', 'orderedList', 'bulletList', '|', 'link', 'blockquote', 'codeBlock', 'image', '|', 'showSource', 'undo', 'redo'],
+        'default' => ['format', '|', 'heading1', 'heading2', 'heading3', '|', 'bold', 'italic', 'strikethrough', 'underline', '|', 'alignLeft', 'alignCenter', 'alignRight', '|', 'orderedList', 'bulletList', '|', 'link', 'blockquote', 'codeBlock', 'table', 'image', '|', 'showSource', 'undo', 'redo'],
         // Add your own presets here ...
     ],
 

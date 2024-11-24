@@ -1,6 +1,7 @@
 <template>
     <Standard :tool="tool" :refs="refs" :editor="editor" />
 
+<!-- todo: Add dropdown language selector -->
 <!--    <BubbleMenu-->
 <!--        class="flex py-1 px-2 bg-gray-50 border border-gray-200 rounded"-->
 <!--        :editor="editor"-->
