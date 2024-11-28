@@ -2,12 +2,13 @@
 
 namespace Jacobfitzp\NovaCanvas;
 
+use Laravel\Nova\Fields\Expandable;
 use Laravel\Nova\Fields\Field;
 use Laravel\Nova\Fields\SupportsDependentFields;
 
 class Canvas extends Field
 {
-    use SupportsDependentFields;
+    use SupportsDependentFields, Expandable;
 
     /**
      * The field's component.
@@ -124,5 +125,17 @@ class Canvas extends Field
     public function scrollable(?int $height = 400): self
     {
         return $this->withMeta(['scrollable' => $height]);
+    }
+
+    /**
+     * Prepare the element for JSON serialization.
+     *
+     * @return array<string, mixed>
+     */
+    public function jsonSerialize(): array
+    {
+        return array_merge(parent::jsonSerialize(), [
+            'shouldShow' => $this->shouldBeExpanded(),
+        ]);
     }
 }
