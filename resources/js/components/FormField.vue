@@ -1,6 +1,6 @@
 <template>
     <DefaultField
-        :field="field"
+        :field="currentField"
         :errors="errors"
         :show-help-text="showHelpText"
         :full-width-content="fullWidthContent"
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { FormField, HandlesValidationErrors } from 'laravel-nova'
+import { FormField, HandlesValidationErrors, DependentFormField } from 'laravel-nova'
 import { EyeIcon } from '@heroicons/vue/24/outline'
 import { Editor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
@@ -58,7 +58,7 @@ export default {
         EditorContent
     },
 
-    mixins: [FormField, HandlesValidationErrors],
+    mixins: [FormField, HandlesValidationErrors, DependentFormField],
 
     props: ['resourceName', 'resourceId', 'field'],
 
