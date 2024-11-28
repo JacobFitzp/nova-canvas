@@ -2,8 +2,8 @@
 
 namespace Jacobfitzp\NovaCanvas;
 
-use Laravel\Nova\Fields\Expandable;
 use Laravel\Nova\Fields\Field;
+use Laravel\Nova\Fields\Expandable;
 use Laravel\Nova\Fields\SupportsDependentFields;
 
 class Canvas extends Field
