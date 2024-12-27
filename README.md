@@ -1,6 +1,6 @@
 # Nova Canvas
 
-<img src="./images/header.png">
+<img src="https://github.com/JacobFitzp/nova-canvas/blob/main/images/header.png?raw=true">
 
 ![Packagist Version](https://img.shields.io/packagist/v/jacobfitzp/nova-canvas)
 ![Packagist Downloads](https://img.shields.io/packagist/dt/jacobfitzp/nova-canvas)
