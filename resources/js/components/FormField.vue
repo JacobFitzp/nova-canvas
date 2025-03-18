@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { FormField, HandlesValidationErrors } from 'laravel-nova'
+import { FormField, HandlesValidationErrors, FormEvents } from 'laravel-nova'
 import { EyeIcon } from '@heroicons/vue/24/outline'
 import { Editor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
@@ -58,7 +58,7 @@ export default {
         EditorContent
     },
 
-    mixins: [FormField, HandlesValidationErrors],
+    mixins: [FormField, HandlesValidationErrors, FormEvents],
 
     props: ['resourceName', 'resourceId', 'field'],
 
@@ -144,6 +144,7 @@ export default {
             ],
             onUpdate: () => {
                 this.value = this.getEditorContent()
+                this.emitFieldValueChange(this.fieldAttribute, this.value)
             }
         })
     },

@@ -12,8 +12,6 @@
 </template>
 
 <script>
-import tools from '../../modules/tools/index'
-
 export default {
     props: {
         editor: {

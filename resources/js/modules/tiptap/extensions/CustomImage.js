@@ -23,7 +23,7 @@ export default Image.extend({
                     return {
                         style: `width: ${attributes.size}%`,
                     }
-                }
+                },
             },
             float: {
                 default: null,
@@ -100,5 +100,27 @@ export default Image.extend({
 
     renderHTML ({ node, HTMLAttributes }) {
         return ['img', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)]
-    }
+    },
+
+    parseHTML () {
+        return [
+            {
+                tag: 'img',
+                getAttrs: (node) => {
+                    let size = node.style.width || null;
+                    let float = node.style.float || null;
+
+                    // Strip % from width.
+                    size = size?.replace('%', '')
+
+                    // Center alignment.
+                    if (node.style.margin === '0px auto') {
+                        float = 'center'
+                    }
+
+                    return { size, float }
+                },
+            },
+        ];
+    },
 })
