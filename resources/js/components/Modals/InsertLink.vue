@@ -6,13 +6,36 @@
                     Insert link
                 </ModalHeader>
                 <ModalContent>
-                    <form @submit.prevent="this.$emit('confirm', link)">
-                        <Input
-                            v-model="link"
-                            icon="link"
-                            focus
-                            placeholder="https://example.com"
-                        />
+                    <form
+                        class="space-y-4"
+                        @submit.prevent="this.$emit('confirm', link)"
+                    >
+                        <div>
+                            <label>URL</label>
+                            <Input
+                                v-model="link"
+                                class="mt-1"
+                                placeholder="https://example.com"
+                                autofocus
+                                focus
+                            />
+                        </div>
+
+                        <div>
+                            <label>Target (optional)</label>
+                            <Input
+                                class="mt-1"
+                                placeholder="_blank"
+                            />
+                        </div>
+
+                        <div>
+                            <label>Rel (optional)</label>
+                            <Input
+                                class="mt-1"
+                                placeholder="norefer"
+                            />
+                        </div>
                     </form>
                 </ModalContent>
             </slot>
