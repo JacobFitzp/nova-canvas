@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "@heroicons/vue": "^2.1.5",
+        "@inertiajs/inertia": "^0.11.1",
         "@tiptap/extension-character-count": "^2.4.0",
         "@tiptap/extension-code-block-lowlight": "^2.4.0",
         "@tiptap/extension-dropcursor": "^2.5.7",
@@ -42,6 +43,7 @@
         "lowlight": "^3.1.0",
         "simply-beautiful": "^1.0.1",
         "tippy.js": "^6.3.7",
-        "vue3-sticky-directive": "^0.0.2"
+        "vue3-sticky-directive": "^0.0.2",
+        "vuex": "^4.1.0"
     }
 }
