@@ -111,7 +111,7 @@ export default {
                 const tool = tools[item]
                 tool.field = this.field
 
-                // Initialize the tool.
+                // Initialise the tool.
                 if (tool.init) {
                     tool.init(this.editor, this.refs)
                 }
@@ -127,6 +127,7 @@ export default {
             editorProps: {
                 attributes: {
                     class: 'nova-canvas-content h-auto overflow-y-scroll min-h-40 max-w-none block py-3 prose prose-slate form-control form-input form-input--bottom form-control-bordered dark:prose-invert prose-sm focus:outline-none',
+                    // Apply a fixed height if the field is scrollable.
                     style: this.field.scrollable ? `height: ${this.field.scrollable}px;` : ''
                 },
             },
